@@ -283,9 +283,6 @@
     <None Update="Assert\Resources\Potawatomi__Potawatomi_%28Matthew_Acts%29_%28Lykins_1844%29__potawatomi__LTR.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Assert\Resources\resource.ts">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="Assert\Resources\Romanian__Cornilescu__cornilescu__LTR.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
