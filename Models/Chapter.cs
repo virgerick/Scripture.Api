@@ -1,8 +1,7 @@
-﻿namespace Scripture.Api.Models
+﻿namespace Scripture.Api.Models;
+
+public class Chapter
 {
-    public class Chapter
-    {
-        public int Number { get; set; }
-        public ICollection<string> Verses { get; set; }
-    }
+    public int Number { get; set; }
+    public ICollection<VerseRecord> Verses { get; set; }
 }

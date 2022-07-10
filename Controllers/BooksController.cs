@@ -1,18 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
+using Scripture.Api.Exceptions;
 using Scripture.Api.Interfaces;
 using Scripture.Api.Models;
-using Scripture.Api.ValueObjects;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Scripture.Api.Controllers
 {
-    public class BooksController:ApiControllerBase
+    public class BooksController : ApiControllerBase
     {
         private readonly IBookService _bookService;
 
@@ -20,23 +14,21 @@ namespace Scripture.Api.Controllers
         {
             _bookService = bookService;
         }
-        [HttpGet("[action]")]
-        public async Task<Book> GetBookByCode(string code, int translationId)
+        [HttpGet("{translationId}/{code}")]
+        public async Task<Book> GetBookByCode(int translationId, string code)
         {
-             var result=await _bookService.GetAsync(code, translationId);
+            var result = await _bookService.GetAsync(code, translationId);
             return result;
         }
-        [HttpGet]
-        public async Task<ICollection<Book>> GetBooks( int translationId)
+
+        [HttpGet("{translationId}/{code}/[action]/{chapter}")]
+        public async Task<Chapter> GetChapter(int translationId, string code, int chapter)
         {
-             var result=await _bookService.GetAsync( translationId);
-            return result;
+            var book = await _bookService.GetAsync(code, translationId);
+            var found = book.Chapters.FirstOrDefault(x => x.Number == chapter);
+            if (found == null) throw new NotFoundException(nameof(Chapter), chapter);
+            return found;
         }
-        [HttpGet("[action]")]
-        public async Task<ICollection<BookType>> GetBookTypes( int translationId)
-        {
-             var result=await _bookService.GetAsync( translationId);
-            return result.Select(b=>b.Type).ToList();
-        }
+
     }
 }

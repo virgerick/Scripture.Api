@@ -1,10 +1,9 @@
 ﻿using Scripture.Api.Models;
 
-namespace Scripture.Api.Interfaces
-{
-    public interface IVerseService
-    {
+namespace Scripture.Api.Interfaces;
 
-        ValueTask<ICollection<Verse>> GetByIdAsync(int idTranslation);
-    }
+public interface IVerseService
+{
+
+    ValueTask<ICollection<Verse>> GetByIdAsync(int idTranslation);
 }
