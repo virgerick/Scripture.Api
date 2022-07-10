@@ -32,7 +32,12 @@ namespace Scripture.Api.Services
                     if (string.IsNullOrEmpty(line)) continue;
                     var array = line.Split("||");
                    if (array.Length == 0) continue;
-                     var verse = new Verse { TranslationId = idTranslation, Book = array[0], Chapter = Convert.ToInt32(array[1]), Number = Convert.ToInt32(array[2]), Text = array[3] };
+                     var verse = new Verse { 
+                         TranslationId = idTranslation, 
+                         Book = array[0],
+                         Chapter = Convert.ToInt32(array[1]), 
+                         Number = Convert.ToInt32(array[2]), 
+                         Text = array[3] };
                     result.Add(verse);
                 }
             }

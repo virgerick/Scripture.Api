@@ -18,7 +18,7 @@ public class TranslationRecord
     public string Abbreviation { get; set; }
     public string Textdirection { get; set; }
 
-    public TranslationRecord From(TranslationDto translationDto) => new TranslationRecord
+    public static TranslationRecord From(TranslationDto translationDto) => new TranslationRecord
     {
         Abbreviation = translationDto.Abbreviation,
         Id = translationDto.Id,

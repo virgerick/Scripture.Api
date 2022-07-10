@@ -105,6 +105,7 @@ public class BookType : ValueObject
         yield return Nehemiah;
         yield return Esther;
         yield return Job;
+        yield return Psalms;
         yield return Proverbs;
         yield return Ecclesiastes;
         yield return Song_of_Songs;

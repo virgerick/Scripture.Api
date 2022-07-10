@@ -4,6 +4,7 @@ using Scripture.Api.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddSingleton<IBookService, BookService>();
 builder.Services.AddSingleton<ITranslationService, TranslationService>();
 builder.Services.AddSingleton<IVerseService, VerseService>();
 builder.Services.AddControllers();
