@@ -18,22 +18,51 @@ public class TranslationsController : ApiControllerBase
 
 
     [HttpGet]
-    public async Task<List<TranslationDto>> GetAsync()
+    public async Task<ResultList<TranslationDto>> GetAsync()
     {
-        return await _translationService.GetAsync();
+        try
+        {
+            var result = await _translationService.GetAsync();
+            return ResultList<TranslationDto>.Success(result);
+        }
+        catch (Exception e)
+        {
+
+            return ResultList<TranslationDto>.Failure(new string[] { e.Message });
+        }
+
     }
     [HttpGet("{id}")]
-    public async Task<TranslationDto> Get(int id)
+    public async Task<Result<TranslationDto>> Get(int id)
     {
+        try
+        {
+            var result = await _translationService.GetAsync(id);
+            return Result<TranslationDto>.Success(result);
+        }
+        catch (Exception e)
+        {
 
-        return await _translationService.GetAsync(id);
+            return Result<TranslationDto>.Failure(new string[] { e.Message });
+        }
+
     }
 
     [HttpGet("[action]/{name}")]
-    public async Task<TranslationDto> GetByName(string name)
+    public async Task<Result<TranslationDto>> GetByName(string name)
     {
 
-        return await _translationService.GetAsync(name);
+
+        try
+        {
+            var result = await _translationService.GetAsync(name);
+            return Result<TranslationDto>.Success(result);
+        }
+        catch (Exception e)
+        {
+
+            return Result<TranslationDto>.Failure(new string[] { e.Message });
+        }
     }
 }
 
