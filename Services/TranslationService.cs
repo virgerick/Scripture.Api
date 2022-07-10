@@ -10,9 +10,12 @@ public class TranslationService : ITranslationService
     private List<TranslationDto> _translatios = new List<TranslationDto>();
     public TranslationService()
     {
-
+        /*
         var path = $@"{Environment.CurrentDirectory}\Assert\translations.json";
-        var json = File.ReadAllTextAsync(path).GetAwaiter().GetResult();
+        var json = File.ReadAllTextAsync(path).GetAwaiter().GetResult();*/
+        var httpClient = new HttpClient();
+        httpClient.BaseAddress =new Uri("https://raw.githubusercontent.com/virgerick/Scripture.Api/master/Assert/translations.json");
+        var json = httpClient.GetStringAsync("").GetAwaiter().GetResult();
         var translarions = json.Deserialize<Translations>();
         var type = translarions.GetType();
         foreach (var info in type.GetProperties())
