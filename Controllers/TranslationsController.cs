@@ -64,5 +64,20 @@ public class TranslationsController : ApiControllerBase
             return Result<TranslationDto>.Failure(new string[] { e.Message });
         }
     }
+
+    [HttpGet("[action]/{language}")]
+    public async Task<ResultList<TranslationDto>> GetByLanguage(string language)
+    {
+        try
+        {
+            var result = await _translationService.GetByLanguageAsync(language);
+            return ResultList<TranslationDto>.Success(result);
+        }
+        catch (Exception e)
+        {
+
+            return ResultList<TranslationDto>.Failure(new string[] { e.Message });
+        }
+    }
 }
 

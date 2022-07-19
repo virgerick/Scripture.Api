@@ -10,12 +10,24 @@ public class TranslationService : ITranslationService
     private List<TranslationDto> _translatios = new List<TranslationDto>();
     public TranslationService()
     {
-        /*
-        var path = $@"{Environment.CurrentDirectory}\Assert\translations.json";
-        var json = File.ReadAllTextAsync(path).GetAwaiter().GetResult();*/
-        var httpClient = new HttpClient();
-        httpClient.BaseAddress =new Uri("https://raw.githubusercontent.com/virgerick/Scripture.Api/master/Assert/translations.json");
-        var json = httpClient.GetStringAsync("").GetAwaiter().GetResult();
+       LoadTranslationsAsync().GetAwaiter().GetResult();
+    }
+
+    private async Task LoadTranslationsAsync()
+    {
+        string json;
+        try
+        {
+            var path = $@"{Environment.CurrentDirectory}\Assert\translations.json";
+            json = await File.ReadAllTextAsync(path);
+        }
+        catch
+        {
+            var httpClient = new HttpClient();
+            httpClient.BaseAddress = new Uri("https://raw.githubusercontent.com/virgerick/Scripture.Api/master/Assert/translations.json");
+            json = await httpClient.GetStringAsync("");
+        }
+
         var translarions = json.Deserialize<Translations>();
         var type = translarions.GetType();
         foreach (var info in type.GetProperties())
@@ -24,6 +36,7 @@ public class TranslationService : ITranslationService
             if (value is TranslationDto translation) _translatios.Add(translation);
         }
     }
+
     public async ValueTask<List<TranslationDto>> GetAsync()
     {
         return _translatios;
@@ -50,9 +63,9 @@ public class TranslationService : ITranslationService
         return found;
     }
 
-    public async ValueTask<TranslationDto> GetByLanguageAsync(string language)
+    public async ValueTask<List<TranslationDto>> GetByLanguageAsync(string language)
     {
-        var found = _translatios.FirstOrDefault(t => t.Language == language);
+        var found = _translatios.Where(t => t.Language == language).ToList();
         if (found == null) throw new NotFoundException("Translation", language);
         return found;
     }

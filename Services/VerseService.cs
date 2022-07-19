@@ -20,12 +20,23 @@ public class VerseService : IVerseService
     {
         var result = new Collection<Verse>();
         var translation = await _translationService.GetAsync(idTranslation);
-        var uri = $"https://raw.githubusercontent.com/virgerick/Scripture.Api/master/Assert/Resources/{translation.Filename}.txt";
-        if (translation == null) throw new NotFoundException("Translation", idTranslation);
-        var httpClient = new HttpClient();
-        var stream = await httpClient.GetStreamAsync(uri);
-        using StreamReader streamReader = new StreamReader(stream);
-        string text = streamReader.ReadToEnd();
+        string text;
+        try
+        {
+            var path = $@"{Environment.CurrentDirectory}\Assert\Resources\{translation.Filename}.txt";
+           text = File.ReadAllText(path);
+        }
+        catch
+        {
+
+            var uri = $"https://raw.githubusercontent.com/virgerick/Scripture.Api/master/Assert/Resources/{translation.Filename}.txt";
+            if (translation == null) throw new NotFoundException("Translation", idTranslation);
+            var httpClient = new HttpClient();
+            var s = await httpClient.GetStreamAsync(uri);
+            using StreamReader streamReader = new StreamReader(s);
+             text = streamReader.ReadToEnd();
+           
+        }
         if (text == null) throw new NotFoundException($"Translation", idTranslation);
         string[] lines = text.Split("\n");
 

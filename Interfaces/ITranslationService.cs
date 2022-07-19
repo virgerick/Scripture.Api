@@ -8,5 +8,5 @@ public interface ITranslationService
     ValueTask<TranslationDto> GetAsync(int id);
     ValueTask<TranslationDto> GetAsync(string name);
     ValueTask<TranslationDto> GetByAbbreviationAsync(string abbreviation);
-    ValueTask<TranslationDto> GetByLanguageAsync(string language);
+    ValueTask<List<TranslationDto>> GetByLanguageAsync(string language);
 }

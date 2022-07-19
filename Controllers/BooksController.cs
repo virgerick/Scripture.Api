@@ -15,19 +15,36 @@ namespace Scripture.Api.Controllers
             _bookService = bookService;
         }
         [HttpGet("{translationId}/{code}")]
-        public async Task<Book> GetBookByCode(int translationId, string code)
+        public async Task<Result<Book>> GetBookByCode(int translationId, string code)
         {
-            var result = await _bookService.GetAsync(code, translationId);
-            return result;
+            try
+            {
+                var result = await _bookService.GetAsync(code, translationId);
+                return Result<Book>.Success(result);
+            }
+            catch (Exception e)
+            {
+
+                return Result<Book>.Failure(new string[] { e.Message });
+            }
+
         }
 
         [HttpGet("{translationId}/{code}/[action]/{chapter}")]
-        public async Task<Chapter> GetChapter(int translationId, string code, int chapter)
+        public async Task<Result<Chapter>> GetChapter(int translationId, string code, int chapter)
         {
-            var book = await _bookService.GetAsync(code, translationId);
-            var found = book.Chapters.FirstOrDefault(x => x.Number == chapter);
-            if (found == null) throw new NotFoundException(nameof(Chapter), chapter);
-            return found;
+            try
+            {
+                var book = await _bookService.GetAsync(code, translationId);
+                var found = book.Chapters.FirstOrDefault(x => x.Number == chapter);
+                if (found == null) throw new NotFoundException(nameof(Chapter), chapter);
+                return Result<Chapter>.Success(found);
+            }
+            catch (Exception e)
+            {
+
+                return Result<Chapter>.Failure(new string[] { e.Message });
+            }
         }
 
     }
