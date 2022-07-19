@@ -8,7 +8,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<IBookService, BookService>();
 builder.Services.AddSingleton<ITranslationService, TranslationService>();
 builder.Services.AddSingleton<IVerseService, VerseService>();
-//builder.Services.AddTransient<MySqlConnection>(_ => new MySqlConnection(builder.Configuration.GetConnectionString("Default"));
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(AllowSpecificOrigins,
@@ -33,7 +32,7 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-app?.UseCors(AllowSpecificOrigins);
+app.UseCors(AllowSpecificOrigins);
 //Todo:Hide in productions if needed.
 app.UseSwagger();
 app.UseSwaggerUI();
