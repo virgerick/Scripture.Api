@@ -108,7 +108,8 @@ public class BookType : ValueObject
     public static BookType NewNehemiah => new BookType("Nehemiah", "Nehemiah");
     public static BookType NewEsther => new BookType("Esther", "Esther");
     public static BookType NewJob => new BookType("Job", "Job");
-    public static BookType NewPsalm => new BookType("Psalms", "Psalm");
+    public static BookType NewPsalm => new BookType("Psalm", "Psalm");
+    public static BookType NewPsalms => new BookType("Psalms", "Psalms");
     public static BookType NewProverbs => new BookType("Proverbs", "Proverbs");
     public static BookType NewEcclesiastes => new BookType("Ecclesiastes", "Ecclesiastes");
     public static BookType NewSong_of_Songs => new BookType("Song of Songs", "Song of Songs");
@@ -254,6 +255,7 @@ public class BookType : ValueObject
         yield return NewEsther;
         yield return NewJob;
         yield return NewPsalm;
+        yield return NewPsalms;
         yield return NewProverbs;
         yield return NewEcclesiastes;
         yield return NewSong_of_Songs;
