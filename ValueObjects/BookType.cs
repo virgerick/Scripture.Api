@@ -36,7 +36,7 @@ public class BookType : ValueObject
     public static BookType Nehemiah => new BookType("Nehemiah", "16O");
     public static BookType Esther => new BookType("Esther", "17O");
     public static BookType Job => new BookType("Job", "18O");
-    public static BookType Psalms => new BookType("Psalm", "19O");
+    public static BookType Psalms => new BookType("Psalms", "19O");
     public static BookType Proverbs => new BookType("Proverbs", "20O");
     public static BookType Ecclesiastes => new BookType("Ecclesiastes", "21O");
     public static BookType Song_of_Songs => new BookType("Song of Songs", "22O");
@@ -108,7 +108,7 @@ public class BookType : ValueObject
     public static BookType NewNehemiah => new BookType("Nehemiah", "Nehemiah");
     public static BookType NewEsther => new BookType("Esther", "Esther");
     public static BookType NewJob => new BookType("Job", "Job");
-    public static BookType NewPsalm => new BookType("Psalm", "Psalm");
+    public static BookType NewPsalm => new BookType("Psalms", "Psalm");
     public static BookType NewProverbs => new BookType("Proverbs", "Proverbs");
     public static BookType NewEcclesiastes => new BookType("Ecclesiastes", "Ecclesiastes");
     public static BookType NewSong_of_Songs => new BookType("Song of Songs", "Song of Songs");
