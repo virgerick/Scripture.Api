@@ -2,29 +2,25 @@
 {
     public interface IResult
     {
-        public bool Succeded { get; set; }
+        public bool Succeeded { get; set; }
         public string[]? Messages { get; set; }
     }
     public interface IResult<T> : IResult
     {
-        public bool Succeded { get; set; }
-        public string[]? Messages { get; set; }
         public T? Data { get; set; }
     }
     public interface IResultList<T> : IResult
     {
-        public bool Succeded { get; set; }
-        public string[]? Messages { get; set; }
         public IList<T>? Items { get; set; }
     }
 
     public class Result : IResult
     {
-        public bool Succeded { get; set; }
+        public bool Succeeded { get; set; }
         public string[] Messages { get; set; }
         public Result(bool succeded, string[] messages)
         {
-            Succeded = succeded;
+            Succeeded = succeded;
             Messages = messages;
         }
 
@@ -34,12 +30,12 @@
     }
     public class Result<T> : IResult<T>
     {
-        public bool Succeded { get; set; }
+        public bool Succeeded { get; set; }
         public string[] Messages { get; set; }
         public T? Data { get; set; }
         public Result(bool succeded, T data, string[] messages)
         {
-            Succeded = succeded;
+            Succeeded = succeded;
             Data = data;
             Messages = messages;
         }
@@ -49,12 +45,12 @@
     }
     public class ResultList<T> : IResultList<T>
     {
-        public bool Succeded { get; set; }
+        public bool Succeeded { get; set; }
         public string[]? Messages { get; set; }
         public IList<T>? Items { get; set; }
         public ResultList(bool succeded, string[] messages, IList<T> items)
         {
-            Succeded = succeded;
+            Succeeded = succeded;
             Messages = messages;
             Items = items;
         }

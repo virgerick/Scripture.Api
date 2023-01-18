@@ -8,3 +8,4 @@ public class Book
     public BookType Type { get; set; }
     public ICollection<Chapter> Chapters { get; set; }
 }
+public record BookRecord(string Name,ICollection<Chapter> Chapters );
